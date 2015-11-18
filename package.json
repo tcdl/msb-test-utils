@@ -1,0 +1,30 @@
+{
+  "name": "msb-test-utils",
+  "version": "0.1.0",
+  "description": "Testing utility modules for MSB",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint && lab -c",
+    "test-watch": "nodemon node_modules/lab/bin/lab -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tcdl/msb-test-utils.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tcdl/msb-test-utils/issues"
+  },
+  "homepage": "https://github.com/tcdl/msb-test-utils",
+  "dependencies": {
+    "async": "^1"
+  },
+  "peerDependencies": {
+    "msb": "^0"
+  },
+  "devDependencies": {
+    "code": "^2.0.1",
+    "lab": "^7.3.0",
+    "msb": "^0"
+  }
+}
