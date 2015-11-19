@@ -4,7 +4,7 @@
   "description": "Testing utility modules for MSB",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint && lab -c",
+    "test": "lab -c",
     "test-watch": "nodemon node_modules/lab/bin/lab -c"
   },
   "repository": {
@@ -23,8 +23,9 @@
     "msb": "^0"
   },
   "devDependencies": {
-    "code": "^2.0.1",
-    "lab": "^7.3.0",
-    "msb": "^0"
+    "code": "^1",
+    "lab": "^6",
+    "msb": "^0",
+    "simple-mock": "^0.4.1"
   }
 }
