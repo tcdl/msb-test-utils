@@ -15,12 +15,12 @@ var expect = Code.expect;
 /* Modules */
 var simple = require('simple-mock');
 var msb = require('msb');
-var mockResponder = require('../mockResponder');
+var mockResponderFactory = require('../mockResponderFactory');
 
-describe('mockResponder', function() {
+describe('mockResponderFactory', function() {
   var channelManager;
   var testNamespace;
-  var testResponder;
+  var mockResponder;
   var testRequester;
   var onError;
   var onAck;
@@ -42,7 +42,7 @@ describe('mockResponder', function() {
     onResponse = simple.mock();
     onEnd = simple.mock();
 
-    testResponder = mockResponder.create({
+    mockResponder = mockResponderFactory.create({
       namespace: testNamespace
     });
 
@@ -58,7 +58,7 @@ describe('mockResponder', function() {
   });
 
   afterEach(function(done) {
-    testResponder.end();
+    mockResponder.end();
     simple.restore();
     done();
   });
@@ -70,15 +70,15 @@ describe('mockResponder', function() {
       });
 
       setImmediate(function() {
-        expect(testResponder.requests.length).equals(1);
-        expect(testResponder.requests[0].payload.body).equals('a');
+        expect(mockResponder.requests.length).equals(1);
+        expect(mockResponder.requests[0].payload.body).equals('a');
         expect(onResponse.callCount).equals(0);
         done();
       });
     });
 
     it('can send a single response', function(done) {
-      testResponder.respondWith([{
+      mockResponder.respondWith([{
         payload: {
           body: 'response'
         }
@@ -89,8 +89,8 @@ describe('mockResponder', function() {
       });
 
       setImmediate(function() {
-        expect(testResponder.requests.length).equals(1);
-        expect(testResponder.requests[0].payload.body).equals('request');
+        expect(mockResponder.requests.length).equals(1);
+        expect(mockResponder.requests[0].payload.body).equals('request');
         expect(onResponse.callCount).equals(1);
         expect(onResponse.lastCall.args[1].payload.body).equals('response');
         done();
@@ -98,7 +98,7 @@ describe('mockResponder', function() {
     });
 
     it('can send a delayed response', function(done) {
-      testResponder.respondWith([{
+      mockResponder.respondWith([{
         payload: {
           body: 'response'
         },
@@ -110,8 +110,8 @@ describe('mockResponder', function() {
       });
 
       setImmediate(function() {
-        expect(testResponder.requests.length).equals(1);
-        expect(testResponder.requests[0].payload.body).equals('request');
+        expect(mockResponder.requests.length).equals(1);
+        expect(mockResponder.requests[0].payload.body).equals('request');
         expect(onResponse.callCount).equals(0);
       });
 
@@ -123,7 +123,7 @@ describe('mockResponder', function() {
     });
 
     it('can respond with multiple responses', function(done) {
-      testResponder.respondWith([
+      mockResponder.respondWith([
         {
           payload: {
             body: 'responseA'
@@ -141,8 +141,8 @@ describe('mockResponder', function() {
       });
 
       setImmediate(function() {
-        expect(testResponder.requests.length).equals(1);
-        expect(testResponder.requests[0].payload.body).equals('request');
+        expect(mockResponder.requests.length).equals(1);
+        expect(mockResponder.requests[0].payload.body).equals('request');
         expect(onResponse.callCount).equals(2);
         expect(onResponse.calls[0].args[1].payload.body).equals('responseA');
         expect(onResponse.calls[1].args[1].payload.body).equals('responseB');
@@ -151,7 +151,7 @@ describe('mockResponder', function() {
     });
 
     it('can ack and then respond with delay beyond the default', function(done) {
-      testResponder.respondWith([
+      mockResponder.respondWith([
         {
           type: 'ack',
           timeoutMs: 1200
@@ -169,13 +169,13 @@ describe('mockResponder', function() {
       });
 
       setImmediate(function() {
-        expect(testResponder.requests.length).equals(1);
-        expect(testResponder.requests[0].payload.body).equals('request');
+        expect(mockResponder.requests.length).equals(1);
+        expect(mockResponder.requests[0].payload.body).equals('request');
         expect(onResponse.callCount).equals(0);
       });
 
       setTimeout(function() {
-        expect(testResponder.requests[0].payload.body).equals('request');
+        expect(mockResponder.requests[0].payload.body).equals('request');
         expect(onResponse.callCount).equals(1);
         expect(onResponse.calls[0].args[1].payload.body).equals('response');
         done();
@@ -183,3 +183,4 @@ describe('mockResponder', function() {
     });
   });
 });
+

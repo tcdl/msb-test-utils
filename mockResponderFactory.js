@@ -46,3 +46,4 @@ mockResponder.create = function (config, channelManager) {
     }
   };
 };
+
