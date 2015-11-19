@@ -4,8 +4,10 @@
   "description": "Testing utility modules for MSB",
   "main": "index.js",
   "scripts": {
-    "test": "lab -c",
-    "test-watch": "nodemon node_modules/lab/bin/lab -c"
+    "npmrc": "printf \"_auth = $NPM_AUTH_TOKEN\nemail = $NPM_EMAIL\n\" > .npmrc",
+    "test": "npm run test-no-publish && if [ -n \"${TRAVIS_TAG}\" ]; then npm run npmrc && npm publish; fi",
+    "test-no-publish": "lab -cv",
+    "test-watch": "nodemon node_modules/lab/bin/lab -cv"
   },
   "repository": {
     "type": "git",
