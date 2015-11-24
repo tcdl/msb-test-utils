@@ -42,7 +42,7 @@ describe('mockResponderFactory', function() {
     onResponse = simple.mock();
     onEnd = simple.mock();
 
-    mockResponder = mockResponderFactory.create({
+    mockResponder = mockResponderFactory.create(msb, {
       namespace: testNamespace
     });
 
