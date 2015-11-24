@@ -1,9 +1,8 @@
 var async = require('async');
-var msb = require('msb');
 
 var mockResponder = exports;
 
-mockResponder.create = function (config, channelManager) {
+mockResponder.create = function (msb, config, channelManager) {
   var requests = [];
   var stack = [];
   var waitTimeouts = [];

@@ -1,1 +1,1 @@
-exports.help = 'require(\'msb-test-utils/mockResponder\')';
+exports.help = 'require(\'msb-test-utils/mockResponderFactory\')';

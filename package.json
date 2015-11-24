@@ -21,9 +21,6 @@
   "dependencies": {
     "async": "^1"
   },
-  "peerDependencies": {
-    "msb": "^0"
-  },
   "devDependencies": {
     "code": "^1",
     "lab": "^6",

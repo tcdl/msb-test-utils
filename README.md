@@ -7,10 +7,11 @@ Testing utility modules for [MSB](https://github.com/tcdl/msb) implementers.
 var mockResponderFactory = require('msb-test-utils/mockResponderFactory');
 ```
 
-### mockResponderFactory.create(options<br/>[, channelManager])
+### mockResponderFactory.create(msb, options[, channelManager])
 
 Sets up a new responder using the provided options and optional channelManager and returns an API for setting up mock responses.
 
+- **msb** Object E.g. `require('msb')`
 - **options** See [msb.Responder.createEmitter()](https://github.com/tcdl/msb#respondercreateemitteroptions-channelmanager)
 - **channelManager** Optional See [msb.Responder.createEmitter()](https://github.com/tcdl/msb#respondercreateemitteroptions-channelmanager).
 
